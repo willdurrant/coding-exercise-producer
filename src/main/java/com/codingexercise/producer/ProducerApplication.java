@@ -38,7 +38,7 @@ public class ProducerApplication implements CommandLineRunner {
 
 	private static final String MAILBOX_EVENTS_DESTINATION = "mailbox-events-destination";
 
-	private static final String EVENTS_REST_URL = "http://localhost:9080/events";
+	private static final String EVENTS_REST_URL = "http://localhost:8080/events";
 
 	private static final Logger log = LoggerFactory.getLogger(ProducerApplication.class);
 
