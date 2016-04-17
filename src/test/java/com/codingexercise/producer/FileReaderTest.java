@@ -32,11 +32,30 @@ public class FileReaderTest {
 
 	/**
 	 * Test method for
-	 * {@link com.codingexercise.producer.FileReader#loadEventsFromFile()}.
+	 * {@link com.codingexercise.producer.FileReader#getSourceDataAsText()}.
 	 */
 	@Test
-	public void testLoadEventsFromFile() {
-		List<Event> jsonEvents = classUnderTest.loadEventsFromFile();
+	public void testGetSourceDataAsText() {
+		List<String> lines = classUnderTest.getSourceDataAsText();
+		Assert.assertNotNull(lines);
+		Assert.assertTrue(lines.size() > 0);
+		for (String line : lines) {
+			Assert.assertTrue(line.contains("events"));
+			Assert.assertTrue(line.contains("attributes"));
+			Assert.assertTrue(line.contains("Account Number"));
+			Assert.assertTrue(line.contains("Transaction Amount"));
+			Assert.assertTrue(line.contains("Name"));
+			Assert.assertTrue(line.contains("Product"));
+		}
+	}
+	
+	/**
+	 * Test method for
+	 * {@link com.codingexercise.producer.FileReader#getSourceDataAsEvents()}.
+	 */
+	@Test
+	public void testGetSourceDataAsEvents() {
+		List<Event> jsonEvents = classUnderTest.getSourceDataAsEvents();
 		Assert.assertNotNull(jsonEvents);
 		Assert.assertTrue(jsonEvents.size() > 0);
 		for (Event event : jsonEvents) {

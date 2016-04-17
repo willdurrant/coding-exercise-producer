@@ -6,8 +6,15 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Event {
+public class Event implements Serializable{
 
+	/**
+	 * Generated serial id.
+	 */
+	private static final long serialVersionUID = 4158024838489970681L;
+	
+	private String id;
+	
 	private List<EventAttribute> eventAttributes;
     
     public Event() {}
@@ -20,13 +27,10 @@ public class Event {
 		return eventAttributes;
 	}
 
-    
-//    @Override
-//    public String toString() {
-//        return String.format(
-//                "Event[id=%s, firstName='%s', lastName='%s']",
-//                id, firstName, lastName);
-//    }
+	public String getId() {
+		return id;
+	}
+
 
 }
 

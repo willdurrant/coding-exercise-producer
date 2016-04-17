@@ -1,9 +1,16 @@
 package com.codingexercise.producer.domain;
 
+import java.io.Serializable;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class EventAttribute {
+public class EventAttribute implements Serializable {
+
+	/**
+	 * Generated serial id.
+	 */
+	private static final long serialVersionUID = 8870214086797013170L;
 
 	private String accountNum;
 	
