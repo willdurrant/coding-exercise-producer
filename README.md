@@ -42,7 +42,7 @@ mvn clean package
 java -jar target/producer-0.0.1-SNAPSHOT.jar -api http
 ```
 ```bash
-- java -jar target/producer-0.0.1-SNAPSHOT.jar -api jms
+java -jar target/producer-0.0.1-SNAPSHOT.jar -api jms
 ```
 
 ## Verifying data has been persisted
