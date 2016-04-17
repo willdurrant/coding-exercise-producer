@@ -15,15 +15,44 @@ This data is then sent to the Consumer component by either a HTTP Restful API or
 
 The project is built using Spring 4 Boot.
 
-- Clone repository locally
-- cd coding-exercise-producer
-- mvn clean install
-- mvn eclipse:eclipse (optional if importing into Eclipse/STS)
+Clone repository locally
+
+```bash
+cd coding-exercise-producer
+mvn clean install
+```
+
+Optional if importing into Eclipse/STS
+```bash
+mvn eclipse:eclipse 
+```
 
 ## Running the project via command line
 
-- cd coding-exercise-producer
-- mvn clean package
-- java -jar target/producer-0.0.1-SNAPSHOT.jar -api http
-- java -jar target/producer-0.0.1-SNAPSHOT.jar -api jms
+- Make sure Mongo is running on localhost
+- Optional for using JMS broker make sure ActiveMQ is running on the URL 'tcp://localhost:61616'
 
+```bash
+cd coding-exercise-producer
+mvn clean package
+```
+- To run specifying <option> for `-api` as either `http` or `jms`
+
+```bash
+java -jar target/producer-0.0.1-SNAPSHOT.jar -api http
+```
+```bash
+- java -jar target/producer-0.0.1-SNAPSHOT.jar -api jms
+```
+
+## Verifying data has been persisted
+
+- In the console logs you should see some indication of events being received either via HTTP or JMS and persisted in the database
+- Within the Mongo CLI you should see the data by doing the following;
+
+```javascript
+> use customer_event_repository
+> db.customer_events.find()
+```
+
+- Note: the additional attribute 'apiType' has been added to the customer_event document. This indicates the API type by which the Producer sent the data to the Consumer - either HTTP_RESTFUL or JMS_BROKER
