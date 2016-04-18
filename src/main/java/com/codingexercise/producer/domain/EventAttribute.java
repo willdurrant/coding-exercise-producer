@@ -4,6 +4,11 @@ import java.io.Serializable;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+/**
+ * Domain object representing attributes related to a Customer Event.
+ * 
+ * @author wdurrant
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class EventAttribute implements Serializable {
 
@@ -12,12 +17,24 @@ public class EventAttribute implements Serializable {
 	 */
 	private static final long serialVersionUID = 8870214086797013170L;
 
+	/**
+	 * The customer account number.
+	 */
 	private String accountNum;
 	
-	private String txAmount; //TODO use some money amount
+	/**
+	 * Transaction amount.
+	 */
+	private String txAmount;
 	
+	/**
+	 * Card member name.
+	 */
 	private String cardMemberName;
 	
+	/**
+	 * Card product type.
+	 */
 	private String product;
 	
     public EventAttribute() {}
@@ -30,6 +47,22 @@ public class EventAttribute implements Serializable {
 		this.product = product;
 	}
 
+	public String getAccountNum() {
+		return accountNum;
+	}
+
+	public String getTxAmount() {
+		return txAmount;
+	}
+
+	public String getCardMemberName() {
+		return cardMemberName;
+	}
+
+	public String getProduct() {
+		return product;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -72,32 +105,6 @@ public class EventAttribute implements Serializable {
 			return false;
 		return true;
 	}
-
-	public String getAccountNum() {
-		return accountNum;
-	}
-
-	public String getTxAmount() {
-		return txAmount;
-	}
-
-	public String getCardMemberName() {
-		return cardMemberName;
-	}
-
-	public String getProduct() {
-		return product;
-	}
-
-    
-    
-
-//    @Override
-//    public String toString() {
-//        return String.format(
-//                "Event[id=%s, firstName='%s', lastName='%s']",
-//                id, firstName, lastName);
-//    }
 
 }
 

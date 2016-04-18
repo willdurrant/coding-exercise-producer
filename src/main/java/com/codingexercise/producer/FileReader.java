@@ -1,7 +1,6 @@
 package com.codingexercise.producer;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -9,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.commons.io.FileUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -21,7 +19,7 @@ import com.codingexercise.producer.domain.EventAttribute;
 
 /**
  * Component to load in source file and parse the data into a collection of JSON
- * objects.
+ * objects or just pass back data as collection of strings.
  * 
  * @author wdurrant
  */

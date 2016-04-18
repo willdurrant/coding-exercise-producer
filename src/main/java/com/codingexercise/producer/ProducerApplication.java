@@ -14,8 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,17 +28,22 @@ import org.springframework.util.FileSystemUtils;
 import org.springframework.web.client.RestTemplate;
 
 import com.codingexercise.producer.domain.Event;
-import com.sun.javafx.binding.StringFormatter;
 
+/**
+ * Main class for Spring Boot application. Also combines Spring's Java
+ * Configuration.
+ * 
+ * @author wdurrant
+ */
 @SpringBootApplication
 @EnableJms
 public class ProducerApplication implements CommandLineRunner {
 
-	private static final String MAILBOX_EVENTS_DESTINATION = "mailbox-events-destination";
+	private static final Logger log = LoggerFactory.getLogger(ProducerApplication.class);
+
+	protected static final String MAILBOX_EVENTS_DESTINATION = "mailbox-events-destination";
 
 	private static final String EVENTS_REST_URL = "http://localhost:8080/events";
-
-	private static final Logger log = LoggerFactory.getLogger(ProducerApplication.class);
 
 	private static final String API_ARG_SWITCH = "-api";
 
@@ -59,6 +62,19 @@ public class ProducerApplication implements CommandLineRunner {
 
 	@Autowired
 	private JmsTemplate jmsTemplate;
+	
+	@Autowired
+	private RestTemplate restTemplate;
+	
+	/**
+	 * Spring Java Config to allow Spring to instantiate and Autowiring of RestTemplate.
+	 * 
+	 * @return RestTemplate
+	 */
+	@Bean
+	RestTemplate restTemplate(){
+		return new RestTemplate();
+	}
 
 	/**
 	 * Spring Java Config instantiation of the JMS container factory.
@@ -140,15 +156,14 @@ public class ProducerApplication implements CommandLineRunner {
 
 	/**
 	 * 
-	 * @param event as Event
+	 * @param event
+	 *            as Event
 	 */
 	private void postEvent(Event event) {
 
-		RestTemplate restTemplate = new RestTemplate();
 		restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
 
-		ResponseEntity<Event> persistedEvent = restTemplate.postForEntity(EVENTS_REST_URL, event,
-				Event.class);
+		ResponseEntity<Event> persistedEvent = restTemplate.postForEntity(EVENTS_REST_URL, event, Event.class);
 
 		HttpStatus status = persistedEvent.getStatusCode();
 
