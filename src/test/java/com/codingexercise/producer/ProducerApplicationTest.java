@@ -66,6 +66,7 @@ public class ProducerApplicationTest {
 	}
 	
 
+	@SuppressWarnings("unchecked")
 	@Test
 	public void test_Http_Complete_HappyDays_Flow() throws Exception {
 		
